@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block metadescription %}
+	{% if category %}
+		{{category.description}}
+	{% else %}
+		Welcome to the store wher you can find the best of products and guaranteed works.
+	{% endif %}
+{% endblock %}
+{% block title %}
+	{% if category %}
+		{{ category.name }}=Perfect Cushion Store
+	{% else %}
+		See our cushion collection-Perfect Cushion Store
+	{% endif %}
+{% endblock %}
+{% block content %}
+	{% if category %}
+		<div>
+			<div>
+				<p><a href="{% url 'shop:allProdCat' %}">Our Products Collection</a> | {{category.name}}</p>
+			</div>
+		</div>
+	{% endif %}
+	<div>
+		{% if category %}
+			<img src="{{category.image.url}}" alt="{{category.name}}">
+	</div>
+	<br>
+	<div>
+		<h1>{{category.name}}</h1>
+		<p>{{category.description}}</p>
+	</div>
+	<div>
+		{% else %}
+			<img src="{% static 'img/banner.jpg' %}" alt="Our Products Collection">
+	</div>
+	<br>
+	<div>
+		<h1>Our Product Collection</h1>
+		<p>Finding the perfect cushions for your room can instantly add to the levels of comfort and sense of style to your room.They can transform the blandest of decors by adding colours,softness and an air of coziness.As well as being comfy and looking great our range of cushions will emboder your decor with personal charm</p>
+	</div>
+	{% endif %}
+	<div>
+		<div>
+			{% for product in products %}
+			<div>
+				<div>
+					<a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
+					<div>
+						<h4>{{product.name}}</h4>
+						<p>₹{{product.price}}</p>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
