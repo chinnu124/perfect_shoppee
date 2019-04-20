@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block metadescription %}
+	{{ product.description }}
+{% endblock %}
+{% block title %}
+	{{product.name}}-Perfect Shoppee
+{% endblock %}
+{% block content %}
+	<div class="row" style="padding-top: 15px;">
+		<div class="mx-auto">
+			<p><a href="{% url 'shop:allProdCat' %}" style="color:#000;font-size: 16px;text-decoration:none;"> Home</a>|<a href="{{product.category.get_url}}" style="color:#000;font-size: 16px;text-decoration:none;">{{product.category}}</a> | {{product.name}}</p>
+		</div>
+		<div class="container">
+			<br>
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+					<div style="min-width: 18rem;">
+						<img src="{{product.image.url}}" alt="{{product.name}}">
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-12 col-lg-6">
+					<div>
+						<h1 style="text-transform: uppercase;font-size: 30px; letter-spacing:.2em;padding-top:15px;padding-bottom:10px;">{{product.name}}</h1>
+						<p style="color:red;text-transform: uppercase;font-size: 22px; letter-spacing:.2em;">₹{{product.price}}</p>
+						<p style="text-transform: uppercase;font-size: 16px; letter-spacing:.2em;">Product Description</p>
+						<p class="text-justify" style="font-size:18px;padding-right: 20px;">{{product.description}}</p>
+						{% if product.stock <= 0 %}
+							<p style="color:red;text-transform: uppercase;font-size: 20px; letter-spacing:.2em;"><b>Out of stock!</b></p>
+						{% else %}
+							<a  class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to cart</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block metadescription %}
+	Welcome to the store where you can find the best of products and guaranteed works to satisfy your needs.
+{% endblock %}
+{% block title %}
+	Search-The Perfect Shop
+{% endblock %}
+{% block content %}
+	<div>
+		<p class="text-center" style="padding-top: 20px">You have searched for <b>"{{query}}"</b></p>
+	</div>
+	<div class="container">
+		<div class="row mx-auto">
+			{% for product in products %}
+				<div class="col-9 col-sm-12 col-md-4 col-md-12 col-lg-4" style="margin-bottom:10px">
+					<div class="card text-center" style="min-width: 18rem;">
+						<a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}" style="width:90%;height:auto;padding-top:5px;"></a>
+						<div class="card-body">
+							<h4 style="font-size: 16px;letter-spacing: .2em;text-transform: uppercase;">{{product.name}}</h4>
+							<p>₹{{product.price}}</p>
+						</div>
+					</div>
+				</div>
+				{% empty %}
+				<div class="row mx-auto">
+					<p class="text-center" style="padding-top: 20px"><b>No results found</b></p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

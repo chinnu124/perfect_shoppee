@@ -1,0 +1,111 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends "base.html"%}
+{% load staticfiles %}
+{% block metadescription %}
+	This is the shopping cart page.Review your Items once more to verify them.
+{% endblock %}
+{% block title %}
+	Cart
+{% endblock %}
+{% block content %}
+	{% if not cart_items %}
+		<div>
+			<div class="text-center">
+				<br>
+				<h1 class="text-center" style="font-size: 16px;letter-spacing: .2em,text-transform:uppercase;">
+				Your Shopping Cart is Empty
+				</h1>
+				<br>
+				<p class="text-center">
+					Please click <a href="{% url 'shop:allProdCat' %}">here</a>to continue shopping
+				</p>
+			</div>
+		</div>
+	{% else %}
+		<div>
+			<div class="text-center">
+				<br>
+				<h1 class="text-center" style="font-size: 16px;letter-spacing: .2em,text-transform:uppercase;">
+				Your shopping cart
+				</h1>
+				<br>
+			</div>
+		</div>
+		<div class="row mx-auto">
+			<div class="col-12 col-sm-12 col-lg-6 text-center">
+				<table class="table" style="min-width: 400px;font-size: 14px;">
+					<thead style="font-weight: normal;text-transform: uppercase;letter-spacing: .2em;background-color: #f8f9fa;">
+						<tr>
+							<th colspan="5">
+								Your Items
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for cart_item in cart_items %}
+							<tr>
+								<td>
+									<a href="cart_item.product.get_absolute_url"><img src="{{cart_item.product.image.url}}" class="float-left rounded" style="width: 100px; height: 100px;"></a>
+								</td>
+								<td class="text-left">
+									{{cart_item.product.name}}
+									<br>
+									SKU:{{cart_item.product.id}}
+									<br>
+									Unit Price:₹{{cart_item.product.price}}
+									<br>
+									Quantity:{{cart_item.quantity}}*₹{{cart_item.product.price}}
+								</td>
+								<td>
+									₹{{cart_item.sub_total}}
+								</td>
+								{% if cart_item.quantity < cart_item.product.stock %}
+									<td>
+										<a href="{% url 'cart:add_cart' cart_item.product.id %}" style="text-decoration: none;"><i class="fas fa-plus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
+										<a href="" style="text-decoration: none;"><i class="fas fa-minus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
+										<a href="" style="text-decoration: none;"><i class="fas fa-trash-alt" style="text-decoration: none;color: #868e96"></i></a>
+									</td>
+								{% else %}
+									<td>
+										&nbsp;
+										<a href="" style="text-decoration: none;"><i class="fas fa-minus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
+										<a href="" style="text-decoration: none;"><i class="fas fa-trash-alt" style="text-decoration: none;color: #868e96"></i></a>
+									</td>
+									<td>
+									</td>
+								{% endif %}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-12 col-sm-12 col-lg-6 text-center">
+				<table class="table" style="min-width: 400px;font-size: 14px;">
+					<thead style="font-weight: normal;text-transform: uppercase;letter-spacing: .2em;background-color: #f8f9fa;">
+						<tr>
+							<th>
+								Checkout
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								Please review your shopoing cart.
+							</td>
+						</tr>
+						<tr>
+							<td class="text-left">
+								Your total is:<strong>₹{{total}}</strong>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="mx-auto">
+					<a href="{% url 'shop:allProdCat' %}" class="btn btn-secondary btn-block" style="margin-top:5px">Continue Shopping</a>
+				</div>
+			</div>
+		</div>
+		<br>
+	{% endif %}
+{% endblock %}

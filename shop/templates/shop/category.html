@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 {% extends "base.html"%}
 {% load staticfiles %}
 {% block metadescription %}
@@ -9,51 +10,64 @@
 {% endblock %}
 {% block title %}
 	{% if category %}
-		{{ category.name }}=Perfect Cushion Store
+		{{ category.name }}=Perfect Shoppee Store
 	{% else %}
-		See our cushion collection-Perfect Cushion Store
+		See our collection-Perfect Shoppee Store
 	{% endif %}
 {% endblock %}
 {% block content %}
 	{% if category %}
-		<div>
-			<div>
-				<p><a href="{% url 'shop:allProdCat' %}">Our Products Collection</a> | {{category.name}}</p>
+		<div class="row" style="padding-top: 15px;">
+			<div class="mx-auto">
+				<p><a href="{% url 'shop:allProdCat' %}" style="color: #000;font-size: 16px;text-decoration:none;">Our Products Collection</a> | {{category.name}}</p>
 			</div>
 		</div>
 	{% endif %}
-	<div>
+	<div class="mx-auto">
 		{% if category %}
-			<img src="{{category.image.url}}" alt="{{category.name}}">
+			<img src="{{category.image.url}}" alt="{{category.name}}" style="width:100%;height:auto;">
 	</div>
 	<br>
 	<div>
-		<h1>{{category.name}}</h1>
-		<p>{{category.description}}</p>
+		<h1 class="text-center" style="font-size:25px;text-transform:uppercase;letter-spacing:.2em;">{{category.name}}</h1>
+		<p class="text-justify">{{category.description}}</p>
 	</div>
 	<div>
 		{% else %}
-			<img src="{% static 'img/banner.jpg' %}" alt="Our Products Collection">
+			<img src="{% static 'img/banner.png' %}" alt="Our Products Collection" style="width:100%;height:auto;padding-top:5px;">
+			<img src="{% static 'img/banner2.png' %}" alt="Our Products Collection" style="width:100%;height:auto;padding-top:5px;">
+			<img src="{% static 'img/banner1.png' %}" alt="Our Products Collection" style="width:100%;height:auto;padding-top:5px;">
 	</div>
 	<br>
 	<div>
-		<h1>Our Product Collection</h1>
-		<p>Finding the perfect cushions for your room can instantly add to the levels of comfort and sense of style to your room.They can transform the blandest of decors by adding colours,softness and an air of coziness.As well as being comfy and looking great our range of cushions will emboder your decor with personal charm</p>
+		<h1 class="text-center" style="font-size:25px;text-transform:uppercase;letter-spacing:.2em;">Our Product Collection</h1>
+		<p class="text-justify">Finding the perfect cushions for your room can instantly add to the levels of comfort and sense of style to your room.They can transform the blandest of decors by adding colours,softness and an air of coziness.As well as being comfy and looking great our range of cushions will emboder your decor with personal charm</p>
 	</div>
 	{% endif %}
-	<div>
-		<div>
-			{% for product in products %}
-			<div>
-				<div>
-					<a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
-					<div>
-						<h4>{{product.name}}</h4>
+	<div class="container">
+		<div class="row mx-auto">
+			{% for product in products.object_list %}
+			<div class="col-9 col-sm-12 col-md-4 col-md-12 col-lg-4" style="margin-bottom:10px">
+				<div class="card text-center" style="min-width: 18rem;">
+					<a href="{{product.get_url}}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}" style="width:90%;height:auto;padding-top:5px;"></a>
+					<div class="card-body">
+						<h4 style="font-size: 16px;letter-spacing: .2em;text-transform: uppercase;">{{product.name}}</h4>
 						<p>₹{{product.price}}</p>
 					</div>
 				</div>
 			</div>
 			{% endfor %}
 		</div>
+		<div class="mx-auto">
+			{% if products.paginator.num_pages > 1 %}
+				<hr>
+				<div class="text-center">
+					{% for pg in products.paginator.page_range %}
+						<a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %}active{% endif %}">{{pg}}</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	<br>
 	</div>
 {% endblock %}
