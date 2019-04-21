@@ -1,0 +1,20 @@
+The softwares needed will be :
+sublime text
+python 3.7
+First open the files in sublime text.
+Then open the command prompt and direct to the folder where the project files are saved.
+Use "python manage.py runserver" to run the server.
+Copy the link obtained and give '<link>/' to get the home page.
+The username of the admin is "Chinmayee"
+The password is "chinmayee908"
+Since we are using crispy_forms in django for the signin,signup pages we are required to install the crispy_forms module.
+To do this use 'pip3 install --user django-crispy-forms'
+To go to the cart use '<link>/cart/' 
+Use '<link>/<categoryname>' to go to the respective category page
+Use '<link>/<categoryname>/<productname>' to go to the respective product page
+Use '<link>/account/create/' to go to the sign up page
+Use '<link>/account/login/' to go to the login page
+You can use these urls to navigate through the website or just use the provided links in the website to go from one form to another in the 
+website.
+
+Thank you.
