@@ -2,7 +2,7 @@
 <div class="container">
 	<div style="text-align:right;">
 		<ul>
-			{% if request.user.is_authenticated and request.user.first_name %}
+			{% if request.user.is_authenticated %}
 				<li style="list-style:none;color:#000;text-transform:uppercase;letter-spacing:.2em;font-size:14px;padding-right: 20px;display:inline;">
 					Welcome,{{request.user.first_name}}<i class="fas fa-user-circle"></i>
 				</li>
