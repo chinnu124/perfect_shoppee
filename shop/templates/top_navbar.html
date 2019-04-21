@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<div class="container">
+	<div style="text-align:right;">
+		<ul>
+			{% if request.user.is_authenticated and request.user.first_name %}
+				<li style="list-style:none;color:#000;text-transform:uppercase;letter-spacing:.2em;font-size:14px;padding-right: 20px;display:inline;">
+					Welcome,{{request.user.first_name}}<i class="fas fa-user-circle"></i>
+				</li>
+				<li>
+					<a href="account/signout/" style="list-style:none;color:#000;text-transform:uppercase;letter-spacing:.2em;font-size:14px;padding-right: 20px;display:inline;">Sign Out<i class="fas fa-sign-out-alt"></i></a>
+				</li>
+			{% else %}
+				<li>
+					<a href="/account/create/" style="list-style:none;color:#000;text-transform:uppercase;letter-spacing:.2em;font-size:14px;padding-right: 20px;display:inline;">SignUp<i class="fas fa-user-plus"></i></a>
+				</li>
+				<li>
+					<a href="/account/login/" style="list-style:none;color:#000;text-transform:uppercase;letter-spacing:.2em;font-size:14px;padding-right: 20px;display:inline;">SignIn<i class="fas fa-sign-in-alt"></i></i></a>
+				</li>
+			{% endif %}
+		</ul>
+		
+	</div>
+</div>

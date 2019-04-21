@@ -62,14 +62,14 @@
 								{% if cart_item.quantity < cart_item.product.stock %}
 									<td>
 										<a href="{% url 'cart:add_cart' cart_item.product.id %}" style="text-decoration: none;"><i class="fas fa-plus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
-										<a href="" style="text-decoration: none;"><i class="fas fa-minus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
-										<a href="" style="text-decoration: none;"><i class="fas fa-trash-alt" style="text-decoration: none;color: #868e96"></i></a>
+										<a href="{% url 'cart:cart_remove' cart_item.product.id %}" style="text-decoration: none;"><i class="fas fa-minus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
+										<a href="{% url 'cart:item_delete' cart_item.product.id %}" style="text-decoration: none;"><i class="fas fa-trash-alt" style="text-decoration: none;color: #FF0000"></i></a>
 									</td>
 								{% else %}
 									<td>
 										&nbsp;
-										<a href="" style="text-decoration: none;"><i class="fas fa-minus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
-										<a href="" style="text-decoration: none;"><i class="fas fa-trash-alt" style="text-decoration: none;color: #868e96"></i></a>
+										<a href="{% url 'cart:cart_remove' cart_item.product.id %}" style="text-decoration: none;"><i class="fas fa-minus-circle" style="text-decoration: none;color: #868e96"></i></a>&nbsp;
+										<a href="{% url 'cart:item_delete' cart_item.product.id %}" style="text-decoration: none;"><i class="fas fa-trash-alt" style="text-decoration: none;color: #FF0000"></i></a>
 									</td>
 									<td>
 									</td>

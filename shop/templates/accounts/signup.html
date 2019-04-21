@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends "base.html"%}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block metadescription %}
+	Sign Up to get a new account with us.
+{% endblock %}
+{% block title %}
+	Create a new account
+{% endblock %}
+{% block content %}
+	<div>
+		{% if not form.is_valid %}
+			<div class="mx-auto">
+				<br>
+				<h1 class="text-center" style="font-size: 20px;text-transform:uppercase;letter-spacing:.2em">Create your new account</h1>
+				<br>
+				<div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
+					<br>
+					<p>Enter the following information to create your account</p>
+					<form method="post" action="/account/create/">
+						{% csrf_token %}
+						<p>{{form | crispy}}</p>
+						<button type="submit" class="btn btn-secondary">Register</button>
+					</form>
+					<br>
+				</div>
+			</div>
+		{% else %}
+			<div class="mx-auto">
+				<h1 class="text-center" style="text-transform:uppercase;font-size:16px;letter-spacing:.2em">Your account has been successfully created</h1>
+				<br>
+				<div>
+					<p>
+						Dear Customer,
+						<br>
+						<br>
+						Your account has been created and is ready to use.
+						<br>
+						<a href="{% url 'shop:allProdCat' %}">Continue Shopping</a>and enjoy the wide range of products.
+					</p>
+				</div>
+			</div>
+		{% endif %}
+	</div>
+	<br>
+{% endblock %}

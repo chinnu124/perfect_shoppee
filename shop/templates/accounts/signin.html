@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends "base.html"%}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block metadescription %}
+	Sign in to continue shopping with us.
+{% endblock %}
+{% block title %}
+	Sign In
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<br>
+		<h1 class="text-center" style="font-size: 20px;text-transform:uppercase;letter-spacing:.2em">Login or Create a new account</h1>
+		<br>
+		<div class="row">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center" style="margin-bottom: 20px;">
+				<br>
+				<h2 style="font-size:20px;text-transform:uppercase;letter-spacing:.2em;">New Customer?</h2>
+				<br>
+				<a href="/account/create/" class="btn btn-secondary">Create New Account</a>
+			</div>
+			<div class="col-12 col-sm-12 col-md-12 col-lg-6 bg-light">
+				<div>
+					<br>
+					<h2 style="font-size:20px;text-transform:uppercase;letter-spacing:.2em;color:red;">Registered Users Only!!!</h2>
+					<form method="post" action="/account/login/">
+						{% csrf_token %}
+						<p>{{ form | crispy }}</p>
+						<button type="submit" class="btn btn-secondary">LogIn</button>
+					</form>
+					<br>
+				</div>
+			</div>
+		</div>
+		<br>
+	</div>
+	<br>
+{% endblock %}

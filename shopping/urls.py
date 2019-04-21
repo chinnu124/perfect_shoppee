@@ -24,7 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/',include('cart.urls')),
     path('search/',include('search_app.urls')),
+    path('account/create/',views.signupView,name='signup'),
+    path('account/login/',views.signinView,name='signin'),
+    path('account/signout/',views.signoutView,name='signout'),
     path('',include('shop.urls')),
+   
 ]
 
 if settings.DEBUG:
